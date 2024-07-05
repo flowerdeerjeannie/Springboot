@@ -56,7 +56,7 @@ public class MemberController {
 	public MemberVO addMember(MemberVO memberVO) {
 		if (getMemberById(memberVO.getId()) != null) {
 			System.out.println(memberVO.getId()+ "가 이미 존재합니다.");
-					return null;
+			return null;
 		}
 		memberVO.setRegidate(new Date());
 		list.add(memberVO);
@@ -78,12 +78,7 @@ public class MemberController {
 	@DeleteMapping("/member")
 	public int removeMember(Integer id) {
 		try {
-			if (id == 5) {
-				MemberVO member = getMemberById(id);
-				if (member != null) {
-					list.remove(getMemberById(id));
-				}
-			}			
+			list.remove(getMemberById(id));
 		} catch(Exception e) {
 			return 0;
 		}

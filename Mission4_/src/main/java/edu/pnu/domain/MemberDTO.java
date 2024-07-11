@@ -19,3 +19,5 @@ public class MemberDTO {
 	private String name;
 	private Date regidate;
 }
+
+

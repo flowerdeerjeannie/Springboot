@@ -1,98 +1,42 @@
 package edu.pnu.service;
 
-import java.lang.reflect.Member;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
+import edu.pnu.dao.MemberDao;
 import edu.pnu.domain.MemberDTO;
 
+//dao->service->controller 이므로
+//Service안에는 dao 변수를 선언하고 
+//dao 생성자를 만들어서 얘가 주는 데이터를 받을수있또록 함 
 public class MemberService {
-	List<MemberDTO> list = new ArrayList<>();
-	Connection con = null;
-	PreparedStatement ps=null;
-	ResultSet rs = null;
 	
-	public MemberDTO addMember(Connection con, String pass, MemberDTO MemberDTO) throws SQLException {
-		
-		try {
-			if (getMemberById(MemberDTO.getId()) != null) {
-				System.out.println(MemberDTO.getId()+ "가 이미 존재합니다.");
-						return null;
-		}
-			PreparedStatement ps = con.prepareStatement("insert into member(pass,name) values (?,?)");
-			ps.setString(1, MemberDTO.getPass());
-			ps.setString(2, MemberDTO.getName());
-			ps.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		MemberDTO.setRegidate(new Date());
-        rs.add(MemberDTO);
-		return MemberDTO;
+	private final MemberDao memberDao;
+	
+	public MemberService() throws SQLException {
+		memberDao = new MemberDao();
 	}
 	
-	private MemberDTO getMemberById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<MemberDTO> getAllMembers() throws SQLException {
+		return memberDao.getAllMembers();
+	}
+	
+	public MemberDTO getMember(Integer id) throws SQLException {
+		return memberDao.getMember(id);
+	}
+	//con은 필요없기때문에 매개변수로 받지않는다. 
+	public MemberDTO addMember(MemberDTO dto) throws SQLException {
+		return memberDao.addMember(dto);
+	}
+	
+	public int updateMember(Integer id, String pass, String name) throws SQLException {
+		return memberDao.updateMember(id, pass, name);
+	}
+	
+	public int removeMember(Integer id) {
+		return memberDao.removeMember(id);
 	}
 
-	public int updateMember(Connection con, MemberDTO MemberDTO) throws SQLException {
-		
-		try {
-			MemberDTO m = getMemberById(MemberDTO.getId());
-			if (m==null) 
-				return 0;
-			else {
-			PreparedStatement ps = con.prepareStatement("Update member set pass=?, name=? where id=?");
-			m.setName(MemberDTO.getName());
-			m.setPass(MemberDTO.getPass());
-			m.setId(MemberDTO.getId());
-			ps.executeUpdate();
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return 1;
-	}
-	
-	public int removeMember(Connection con, int id) throws SQLException {
-		try {
-			list.remove(getMemberById(id));
-			PreparedStatement ps = con.prepareStatement("delete from member where id=?");
-			ps.setInt(1, id);
-			ps.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return 0;
-		}			
-		return 1;
-	}
 
-		
-	public  List<MemberDTO> getAllMembers(Connection con)throws SQLException {
-		
-	    try {
-	    	ps = con.prepareStatement("select * from member");
-	        rs = ps.executeQuery();
-	        
-	        while (rs.next()) {
-	        	MemberDTO member = new MemberDTO(id, pass, name, );
-	            member.setId(rs.getInt("id"));
-	            member.setPass(rs.getString("pass"));
-	            member.setName(rs.getString("name"));
-	            list.add(member);
-	        }
-	        
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	     
-	    return list;
-	    }
-	}
+
 }

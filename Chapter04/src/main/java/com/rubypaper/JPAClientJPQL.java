@@ -9,7 +9,7 @@ import javax.persistence.TypedQuery;
 
 import com.rubypaper.domain.Board;
 
-public class JPAClientJPQL {
+public class JPAClientJPQL { 
 	
 	public static void main(String[] args) {
 		

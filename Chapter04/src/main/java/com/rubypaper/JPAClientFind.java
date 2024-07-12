@@ -6,7 +6,7 @@ import javax.persistence.Persistence;
 
 import com.rubypaper.domain.Board;
 
-public class JPAClientFind {
+public class JPAClientFind { 
 
 	public static void main(String[] args) {
 		

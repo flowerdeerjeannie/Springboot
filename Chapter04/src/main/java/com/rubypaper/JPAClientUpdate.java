@@ -10,7 +10,7 @@ import javax.persistence.Persistence;
 import com.rubypaper.domain.Board;
 
 public class JPAClientUpdate {
-	public static void main(String[] args) {
+	public static void main(String[] args) { 
 		
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("Chapter04");
 		EntityManager em = emf.createEntityManager();

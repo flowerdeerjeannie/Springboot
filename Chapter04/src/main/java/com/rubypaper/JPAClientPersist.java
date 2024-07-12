@@ -9,7 +9,7 @@ import javax.persistence.Persistence;
 
 import com.rubypaper.domain.Board;
 
-public class JPAClientPersist {
+public class JPAClientPersist { 
 	
 	public static void main(String[] args) {
 		//EntityManager생성

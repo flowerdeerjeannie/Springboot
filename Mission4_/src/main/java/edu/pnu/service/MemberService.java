@@ -67,7 +67,4 @@ public class MemberService {
 		public int removeMember(Integer id) {
 			return memberDao.removeMember(id);
 		}
-
-
-
 }

@@ -14,7 +14,7 @@ import lombok.RequiredArgsConstructor;
 //이 클래스 자체가 bean객체로 올라가야되기때문에 @Component 필수
 
 @RequiredArgsConstructor
-@Component
+//@Component
 public class DataInit implements ApplicationRunner {
 
 	private final BoardRepository boardRepo;
@@ -22,22 +22,22 @@ public class DataInit implements ApplicationRunner {
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 		
-		for (int i=1; i<=5; i++) {
+		for (int i=1; i<=100; i++) {
 			boardRepo.save(Board.builder()
-					.title("title1"+i)
-					.writer("member1")
-					.content("content1" + i)
+					.title("title"+i)
+//					.writer("member1")
+					.content("content" + i)
 					.createDate(new Date())
 					.cnt((long)(Math.random()*100))
 					.build()
 			);
 		}
 		
-		for (int i = 1; i<=5; i++) {
+		for (int i = 1; i<=100; i++) {
 			boardRepo.save(Board.builder()
-					.title("title2"+i)
-					.writer("member2")
-					.content("content2" + i)
+					.title("title"+i)
+//					.writer("member2")
+					.content("content" + i)
 					.createDate(new Date())
 					.cnt((long)(Math.random()*100))
 					.build()
